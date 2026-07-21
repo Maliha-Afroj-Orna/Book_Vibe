@@ -1,8 +1,12 @@
 import { FaRegStar } from "react-icons/fa";
+import { Link } from "react-router";
 
 export default function BookCard({ book }) {
   return (
-    <div className="card bg-base-100 shadow-sm">
+    <Link
+      to={`/bookDetails/${book.bookId}`}
+      className="card bg-base-100 shadow-sm"
+    >
       <figure className="p-6">
         <img
           className="rounded-xl h-[250px]"
@@ -30,6 +34,6 @@ export default function BookCard({ book }) {
           </div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
