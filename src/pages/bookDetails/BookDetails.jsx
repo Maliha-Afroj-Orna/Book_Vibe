@@ -1,12 +1,13 @@
 // import { use } from "react";
+import { useContext } from "react";
 import { useLoaderData, useParams } from "react-router";
+import { BookContext } from "../../context/BookProvider";
 
 // const booksPromise = fetch("/booksData.json").then((res) => res.json());
 
 export default function BookDetails() {
   const { id } = useParams();
   const books = useLoaderData();
-  console.log(books);
 
   const expectedBook = books.find((book) => book.bookId == id);
 
@@ -25,12 +26,7 @@ export default function BookDetails() {
 
   // const books = use(booksPromise);
 
-  const handleMarkAsRead = () => {
-    // step-1: store book id
-    // step-2: where to store
-    // step-3: array format
-    // step-4: if the book is already exists then show an alert or toast
-  };
+  const { handleMarkAsRead, handleWishList } = useContext(BookContext);
 
   return (
     <div className="grid grid-cols-2 container mx-auto my-8">
@@ -72,8 +68,18 @@ export default function BookDetails() {
             <span>Rating: </span> <span className="font-bold">{rating}</span>
           </div>
           <div className="flex items-center gap-2">
-            <button className="btn">Mark as Read</button>
-            <button className="btn btn-info">Add to Wishlist</button>
+            <button
+              onClick={() => handleMarkAsRead(expectedBook)}
+              className="btn"
+            >
+              Mark as Read
+            </button>
+            <button
+              onClick={() => handleWishList(expectedBook)}
+              className="btn btn-info"
+            >
+              Add to Wishlist
+            </button>
           </div>
         </div>
       </div>
